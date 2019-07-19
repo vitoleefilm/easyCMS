@@ -1,0 +1,77 @@
+.cmsMainBox {
+    position: relative;
+    margin: 0 0 24px 0;
+    text-align: left;
+}
+
+.cmsMainBox:after {
+	content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.cmsMainBox h4 {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	margin: 0 auto;
+	font-size: 24px;
+	color: #383735;
+	margin-bottom: 10px;
+}
+
+.cmsMainBox .cmsMainBoxCon > div, .cmsMainBox .cmsMainBoxCon > p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #383735;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.cmsMainBox .cmsHoverCon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    z-index: 100;
+    -webkit-transition: opacity .2s;
+    transition: opacity .2s;
+}
+
+.cmsMainBox .cmsHoverCon:hover {
+    opacity: 1;
+}
+.cmsMainBox .cmsHoverCon .btn-group {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 34px;
+    width: 100%;
+    text-align: center;
+    font-size: 0;
+}
+.cmsMainBox .cmsHoverCon .btn-group a.btn, .cmsMainBox .cmsHoverCon .btn-group div.btn {
+    float: none;
+    display: inline-block;
+    margin: 0;
+    padding: 6 12px !important;
+    font-size: 12px;
+    line-height: 18px;
+}
+.btn.btn-white {
+    color: #333;
+    background: #fff;
+    border-color: #e2e7eb;
+}
+.cmsMainBox .cmsHoverCon .btn-group a i {
+    margin-right: 3px;
+}
