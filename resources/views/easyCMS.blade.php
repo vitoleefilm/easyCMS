@@ -7,9 +7,17 @@
 	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="{{asset('/css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('/css/cms.css')}}">
+	<link rel="stylesheet" href="{{asset('/css/cmsadmin.css')}}">
+	<!-- <script src="{{asset('/js/jquery-1.8.2.min.js')}}"></script> -->
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<script src="{{asset('/js/plugins/baiduTemplate.js')}}"></script>
+	<script src="{{asset('/js/plugins/math.js')}}"></script>
+	<script src="{{asset('/js/plugins/jquery.uploadifive.js')}}"></script>
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
+	<script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+
 </head>
 <body>
 	<div id="page-container">
@@ -20,27 +28,25 @@
 			<div id="title">
 				<h2>easyCMS</h2>
 			</div>
-			<div class="row">
-				<div class="page-content">
-					<div class="cmsPage" style="max-width: 640px; margin: 0 auto;">
-						<div class="cmsMainBox">
-							<div class="cmsHoverCon">
-								<div class="btn-group">
-									<a class="btn btn-white" href="javascript:;">EDIT</a>
-									<a class="btn btn-white" href="javascript:;" >SORT</a>
-									<a class="btn btn-white" href="javascript:;">DELETE</a>
-								</div>
-							</div>
-							<div class="cmsMainBoxCon" id="editable" contenteditable="true">
-								<h4>University for all</h4>
-								<p>We are dedicated to promoting equality. We recognise the advantages of a diverse and talented student community and the benefits that this brings to students and the University as a whole.</p>
-							</div>
+			@csrf
+				<div class="row">
+					<div class="page-content">
+						<div class="cmsPage div_cms_main" style="max-width: 640px; margin: 0 auto;">
+							<button class="submitBox btn btn-white">SAVE</button>
 						</div>
 					</div>
+					
 				</div>
-				
-			</div>
 		</div>
 	</div>
 </body>
+@include('template')
+@include('modal')
 </html>
+<script src="{{asset('/js/easyCms.js')}}"></script>
+<script>
+	easyCms('.cmsPage',{
+		ele_main:'.div_cms_main',
+		ele_sort:'#sort-cms'
+	});
+</script>

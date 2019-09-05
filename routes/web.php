@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('easyCMS');
 });
+
+
+ Route::post('/upload_photo', 'AjaxController@upload_photo');

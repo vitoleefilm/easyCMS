@@ -1,0 +1,405 @@
+.cmsMainBox .cmsHoverCon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    z-index: 100;
+    -webkit-transition: opacity .2s;
+    transition: opacity .2s;
+}
+
+.cmsMainBox .cmsHoverCon:hover {
+    opacity: 1;
+}
+.cmsMainBox .cmsHoverCon .btn-group {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 34px;
+    width: 100%;
+    text-align: center;
+    font-size: 0;
+}
+.cmsMainBox .cmsHoverCon .btn-group a.btn, .cmsMainBox .cmsHoverCon .btn-group div.btn {
+    float: none;
+    display: inline-block;
+    margin: 0;
+    padding: 6 12px !important;
+    font-size: 12px;
+    line-height: 18px;
+}
+.btn.btn-white {
+    color: #333;
+    background: #fff;
+    border-color: #e2e7eb;
+}
+.cmsMainBox .cmsHoverCon .btn-group a i {
+    margin-right: 3px;
+}
+
+.cms-gallery > div {
+    display: none;
+}
+.cms-gallery > div:first-child {
+    display: block;
+}
+.cms-gallery .pic {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 75%;
+    font-size: 0;
+    background: #707478;
+}
+.cms-gallery .pic:after {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+}
+.cms-gallery .pic img {
+    display: block !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    vertical-align: middle !important;
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.editHr {
+    position: relative;
+    margin: auto
+}
+.editHr .del {
+    position: absolute;
+    cursor: pointer;
+    right: -15px;
+    top: -7px;
+    line-height: 15px;
+    text-align: center;
+    height: 15px;
+    width: 15px;
+    background: #ff5b57;
+    color: #fff;
+    border-radius: 3px;
+    opacity: 0
+}
+.cmsPage:hover .editHr .del {
+    opacity: 1
+}
+.editHr .del:before, .editHr .del:after {
+    content: '';
+    width: 9px;
+    height: 1px;
+    background: #fff;
+    position: absolute;
+    left: 3px;
+    top: 7px
+}
+.editHr .del:hover {
+    background: #cc4946
+}
+
+.cmsInsertBox {
+    width: 100%;
+    height: 9px;
+    position: relative;
+    z-index: 99;
+    /*background-image: repeating-linear-gradient(-45deg, transparent, transparent 8%, rgba(0, 0, 0, .1) 8%, rgba(0, 0, 0, .1) 50%);*/
+    background-size: 24px 24px;
+    -webkit-animation: loadingBar 8s linear infinite;
+    opacity: 0;
+    margin: 3px auto;
+}
+.cmsInsertBox.show {
+    opacity: 1;
+}
+.cmsInsertBox:hover {
+    opacity: 1;
+    z-index: 100
+}
+.cmsInsertBox .solid {
+    border-top: #348fe2 1px solid;
+    position: absolute;
+    width: 100%;
+    top: 4px
+}
+.cmsInsertBox .solid:after, .cmsInsertBox .solid:before {
+    content: "";
+    display: block;
+    border: 5px solid;
+    position: absolute;
+    top: -5px
+}
+.cmsInsertBox .solid:after {
+    border-color: transparent transparent transparent #348fe2;
+    left: 0
+}
+.cmsInsertBox .solid:before {
+    border-color: transparent #348fe2 transparent transparent;
+    right: 0
+}
+.cmsInsertBox .editButtonList {
+    position: absolute;
+    left: 50%;
+    margin: -13px 0 0 -326px;
+    width: 652px;
+    text-align: center;
+}
+.uploadifive-queue {
+    display: none !important;
+}
+
+/*sort*/
+
+.movablePlateY {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: #f2f2f2
+}
+.movablePlateY li {
+    cursor: move
+}
+.movablePlateY li.ui-sortable-helper {
+    opacity: .8;
+    background: #333;
+    color: #fff
+}
+.sort-style {
+    margin: 0;
+    padding: 0
+}
+.sort-style li.ui-sortable-placeholder {
+    margin: 10px 0 !important;
+}
+.sort-style li {
+    padding: 15px;
+    background: #fff;
+    margin: 10px 0;
+    border-radius: 3px;
+    padding-left: 100px;
+    position: relative;
+    list-style: none
+}
+.sort-style li p:last-child {
+    margin-bottom: 0
+}
+.sort-style li:after {
+    clear: both;
+    content: "\20";
+    height: 0;
+    display: block
+}
+.sort-style li .tit {
+    font-size: 14px;
+    position: absolute;
+    left: 10px;
+    width: 90px;
+    top: 50%;
+    left: 10px;
+    text-align: center;
+    margin-top: -9px;
+    color: #333
+}
+.sort-style li .info {
+    padding-left: 10px
+}
+.sort-style li img {
+    height: 80px;
+    display: block
+}
+.sort-style li .double img {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+.sort-style li hr {
+    border: none;
+    border-top: #ccc 1px solid;
+    height: 0;
+    background: none;
+    margin: 8px 0
+}
+.sort-style li .fl {
+    margin-right: 10px
+}
+.sort-style li .fr {
+    margin-left: 10px
+}
+.sort-style li.htmlBox {
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #333
+}
+
+.sort .sort-style li {
+    display: inline-block;
+    position: relative;
+    width: 120px;
+    height: 140px;
+    margin: 0 10px 10px 0;
+    padding: 0;
+    cursor: default;
+    box-sizing: content-box;
+}
+.sort .sort-style li .tit {
+    top: 10px !important;
+}
+.sort .sort-style li .editBtn {
+    padding: 20px;
+}
+.sort .sort-style li .uploadImg .bg {
+    width: 120px;
+    height: 140px;
+}
+.sort .sort-style li.ui-sortable-placeholder {
+    position: relative;
+    top: 10px;
+    width: 120px !important;
+    height: 140px !important;
+    margin: 0 10px 10px 10px !important;
+    padding: 0 !important;
+}
+.sort .sort-style li .info {
+    display: none;
+}
+.sort .sort-style li.active .info {
+    display: block;
+}
+.sort .sort-style li.active {
+    display: block;
+    width: 100%;
+    margin: 0 0 10px 0 !important;
+    -box-sizing: border-box !important;
+}
+.sort .sort-style li.active .info {
+    width: 100%;
+    padding: 0 0 0 140px !important;
+}
+.sort .sort-style li.active .info textarea {
+    margin-bottom: 10px;
+}
+/*.sort .sort-style li .editBtn {
+    display: none;
+}*/
+.sort .sort-style li .fa-arrows {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 5px;
+    background: #666;
+    color: #fff;
+    border-radius: 100%;
+    cursor: move;
+}
+
+#edit-gallery li {
+    min-height: 140px
+}
+#edit-gallery .tit {
+    top: 20px;
+}
+#edit-gallery .info {
+    height: 100%;
+    padding-left: 50px;
+}
+#edit-gallery .info textarea {
+    width: 100%;
+    height: 120px;
+    resize: none;
+    border: 1px solid #eee;
+    outline: none;
+}
+
+/*图片上传*/
+
+.uploadImgWrap {
+    text-align: center
+}
+.uploadImgWrap .uploadImg {
+    margin-bottom: 5px
+}
+.uploadImg {
+    width: 120px;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    margin: auto
+}
+.uploadImg .bg {
+    width: 100%;
+    height: 120px;
+    min-width: 120px;
+    border: #eee 1px solid;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAACXBIWXMAAAsTAAALEwEAmpwYAAAARUlEQVRYhe3QsQ0AMAgDwZAtvP9uMAbs4EhpePevkxyZedxJsttrl48DBgYGBgYGBv6/6G47riq73Xc1MDAwMDAw8GJ4AJTWCP4jecGkAAAAAElFTkSuQmCC');
+    background-size: 10px
+}
+.uploadImg .bg img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+    margin: auto
+}
+.uploadImg:hover .editBtn {
+    opacity: 1
+}
+.uploadImg .btn-danger {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    z-index: 100;
+    opacity: 0;
+    text-align: center;
+    -moz-transition: all .2s ease-out;
+    -webkit-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+.uploadImg:hover .btn-danger {
+    opacity: 1;
+}
+.editBtn {
+    position: absolute;
+    opacity: 0;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 15px 20px;
+    display: block;
+    text-align: center;
+    background: rgba(255, 255, 255, .8)
+}
+.editBtn.triple {
+    padding: 0 20px;
+}
+.editBtn strong {
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: normal;
+    margin-bottom: 5px;
+    color: #333
+}
+.btn-small {
+    font-size: 12px;
+    padding: 5px 10px
+}
