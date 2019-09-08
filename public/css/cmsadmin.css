@@ -1,3 +1,13 @@
+.align-right {
+    text-align: right !important;
+}
+.align-left {
+    text-align: left !important;
+}
+.inline-block {
+    display: inline-block !important;
+}
+
 .cmsMainBox .cmsHoverCon {
     position: absolute;
     left: 0;
@@ -362,8 +372,8 @@
 }
 .uploadImg .btn-danger {
     position: absolute;
-    top: -5px;
-    right: -5px;
+/*    top: -5px;
+    right: -5px;*/
     z-index: 100;
     opacity: 0;
     text-align: center;
@@ -402,4 +412,27 @@
 .btn-small {
     font-size: 12px;
     padding: 5px 10px
+}
+
+#edit-image-text .cmsPage .cmsMainBox .cmsMainBoxCon .form-control p {
+    margin: 0 !important;
+}
+#edit-image-text .cmsPage .cmsMainBox .cmsMainBoxCon .form-control ul li {
+    list-style: disc inside !important;
+    margin-left: 0 !important;
+}
+#edit-image-text .cmsPage .cmsMainBox .cmsMainBoxCon .form-control ol li {
+    list-style: decimal inside !important;
+    margin-left: 0 !important;
+}
+
+.cke_textarea_inline {
+    border: 1px solid #e2e7eb;
+    border-radius: 4px;
+    min-height:80px;
+}
+
+.cmsPage .cmsMainBox .float-box {
+    float: none !important;
+    width: auto !important;
 }

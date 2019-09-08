@@ -6,6 +6,7 @@
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="{{asset('/css/style.css')}}">
+	<link rel="stylesheet" href="{{asset('/css/style.min.css')}}">
 	<link rel="stylesheet" href="{{asset('/css/cms.css')}}">
 	<link rel="stylesheet" href="{{asset('/css/cmsadmin.css')}}">
 	<!-- <script src="{{asset('/js/jquery-1.8.2.min.js')}}"></script> -->
@@ -16,10 +17,11 @@
 	<script src="{{asset('/js/plugins/math.js')}}"></script>
 	<script src="{{asset('/js/plugins/jquery.uploadifive.js')}}"></script>
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
-
+	<script src="{{asset('/js/plugins/ckeditor/ckeditor.js')}}"></script>
+	<script src="{{asset('/js/common_function.js')}}"></script>
 </head>
 <body>
+	<?php //print_r(str_replace(array('/r/n', '/r', '/n','\n','\r'), '',$data->content));die;?>
 	<div id="page-container">
 		<div id="side" class="content col-md-2">
 			
@@ -45,8 +47,26 @@
 </html>
 <script src="{{asset('/js/easyCms.js')}}"></script>
 <script>
-	easyCms('.cmsPage',{
-		ele_main:'.div_cms_main',
-		ele_sort:'#sort-cms'
+	$(document).ready(function() {
+		var content = '';
+		@if (!empty($data->content))
+			<?php $data->content = json_decode($data->content,true)?>
+			content = JSON.parse($('<div>').html("{{str_replace(array('/r/n', '/r', '/n','\n','\r'), '',$data->content)}}")[0].textContent);
+		@endif
+		window.easyCms = easyCms({
+			ele_main:'.div_cms_main',
+			ele_sort:'#sort-cms',
+			table:'Page',
+			id:{{$data->id}},
+			content:content
+		});
+		console.log(window.easyCms);
+
+		// $('.submitBox').click(function() {
+		// 	console.log(window.easyCms);
+		// 	// content = window.easyCms.get_content();
+		// 	console.log(content);
+		// });
 	});
+	
 </script>

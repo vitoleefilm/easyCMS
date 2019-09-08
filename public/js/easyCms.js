@@ -10,6 +10,7 @@ var easyCms = function(options){
 		ele_sort:'#sort-cms',
 		editor_zIndex:999,
 		uploadScript:'/upload_photo',
+		saveScript:'/save_cms',
 		table:'',
 		content:'',
 		fileType:['.jpg','.png','.gif'],
@@ -32,7 +33,7 @@ var easyCms = function(options){
 			return;
 		};
 		if(!$(opt.ele_sort).size()){
-			alert('请配置 ele_sort');
+			alert('Please configure ele_sort');
 			return;
 		};
 	};
@@ -203,7 +204,7 @@ var easyCms = function(options){
             }else if($(this).hasClass('insert_video')){//视频模式
                 li = '<li _id="'+id+'" class="box"><div class="tit icon-film">Video</div></li>';
             }else if($(this).hasClass('insert_image_text')){//图文模式
-                li = '<li _id="'+id+'"><div class="tit icon-limg">Image &amp; Text</div><div class="info"><img style="height:100px" class="fl" src="'+$(this).find('img').attr('src')+'" ><p>'+$(this).find('p.div_content').html()+'</p></div></li>';
+                li = '<li _id="'+id+'"><div class="tit icon-limg">Image &amp; Text</div><div class="info"><img style="height:100px" class="fl" src="'+$(this).find('img').attr('src')+'" ><p>'+$(this).find('.div_content').html()+'</p></div></li>';
             }else if($(this).hasClass('insert_split')){//分割线
                 li = '<li _id="'+id+'" class="box"><div class="tit"><i class="fa fa-navicon"></i> Split</div><hr/></li>';
             }else if($(this).hasClass('insert_gallery')){
@@ -314,6 +315,7 @@ var easyCms = function(options){
                         var div_element = $('#'+data_ele.id_div);
 
                         if(window.URL && window.URL.createObjectURL){
+                        	console.log(5);
                             div_element.find('img').attr('src',window.URL.createObjectURL(file));
                         }
 
@@ -338,16 +340,16 @@ var easyCms = function(options){
                         cmsHoverCon.find('.uploadifiveLoadingBar span').css('width', percent + '%');
                     },
                     onUploadComplete:function(file,data){
+                    	console.log(33);
                         var div_element = $('#'+$(this).attr('_id_div'));
                         div_element.find('.cmsHoverCon').css({
                             opacity:''
                         });
                         div_element.find('.uploadifiveLoadingBar').hide();
                         // $this._show_hovercon();
-                        console.log(333);
 
                         var rsp = $.parseJSON(data);
-                        div_element.children('img').attr('src',rsp.src).attr('_media_url',rsp.media_url);
+                        div_element.find('img').attr('src',rsp.src).attr('_media_url',rsp.media_url);
                     },
                     1:1
                 });
@@ -407,7 +409,7 @@ var easyCms = function(options){
                         $this._show_hovercon();
 
                         var rsp = $.parseJSON(data);
-                        div_element.children('img').attr('src',rsp.src).attr('_media_url',rsp.media_url);
+                        div_element.find('img').attr('src',rsp.src).attr('_media_url',rsp.media_url);
                     },
                     1:1
                 });
@@ -517,7 +519,7 @@ var easyCms = function(options){
                         div_element.find('img').attr({src:rsp.src,_media_url:rsp.media_url});
                         $this._bind_upload_gallery();
                     }else{
-                        alert('上传失败: 没有返回ID');
+                        alert('UPLOAD FALIED');
                     }
                     
                     div_element.find('.uploadifiveLoadingBar').hide();
@@ -566,6 +568,7 @@ var easyCms = function(options){
             }
             div_element.find('.cms-gallery').html('');
             modal.find('.sort-gallery li').each(function(k,v) {
+            	console.log($(v).find('img').attr('src'));
                 var data_ele = {
                     src:$(v).find('img').attr('src'),
                     media_url:$(v).find('img').attr('_media_url'),
@@ -598,8 +601,6 @@ var easyCms = function(options){
                     fileType:opt.fileType,
                     uploadScript : opt.uploadScript,
                     formData : {
-                        table:'Cms_image3',
-                        media_url:'',
                         _token:$('#content').find('input[name="_token"]').val()
                     },
                     multi:true,
@@ -633,7 +634,7 @@ var easyCms = function(options){
                             div_element.find('img').attr('src',rsp.src);
                             div_element.find('img').attr('_media_url',rsp.media_url);
                         }else{
-                            alert('上传失败: 没有返回ID');
+                            alert('UPLOAD FALIED');
                         }
                         var div_element = $(this).closest('.uploadImg');
                         div_element.find('.uploadifiveLoadingBar').hide();
@@ -721,7 +722,7 @@ var easyCms = function(options){
             // }).focus();
         });
 
-        //视频 保存
+        //源码 保存
         $(opt.ele_main).on('click','.htmlBox .a_save',function(){
             var div_element = $(this).closest('.div_element');
             var html_code = div_element.find('.htmlBox textarea').val();
@@ -774,11 +775,267 @@ var easyCms = function(options){
     };
 
     /**
+     * 绑定插入图文
+     */
+    this._bind_xcms_insert_image_text = function() {
+        $(opt.ele_main).on('click','.xcms_insert_image_text', function(){
+            var div_element = $(this).closest('.div_element');
+            var modal = $('#edit-image-text');
+            modal.find('.alert-danger').remove();
+            modal.find('img').attr('src','').attr('_media_url','');
+            modal.attr('_div_current',div_element.attr('id'));
+            modal.find('.image-crop').hide();
+            
+            modal.find('.ipt_caption').val('');
+            modal.find('select').val('fl');
+            modal.modal('show');
+            setTimeout(function() {
+                modal.find('#img_txt_editor').attr('contenteditable',true);
+                CKEDITOR.inline('img_txt_editor',{toolbar:'mini'});
+                if(div_element.hasClass('insert_image_text')){
+                    //是编辑
+                    modal.find('img').attr({'src':div_element.find('img').attr('src'),'_media_url':div_element.find('img').attr('_media_url')});
+                    var content = div_element.find('.div_content').html();
+                    CKEDITOR.instances.img_txt_editor.setData(content);
+                    modal.find('.ipt_caption').val(div_element.find('textarea').val());
+                    modal.find('select').val(div_element.find('img').closest('div').attr('class'));
+                } else {
+                    CKEDITOR.instances.img_txt_editor.setData('');
+                }
+            },500);
+            
+            
+        });
+        //上传图片
+        if ($('#file_upload_imageText').attr('_uploadifive')) {
+            return;
+        } else {
+            $('#file_upload_imageText').attr('_uploadifive',true);
+            $('#file_upload_imageText').uploadifive({
+                'buttonClass'  : 'btn btn-success btn-block btn-small m-b-5',
+                'width': '',
+                'height': '',
+                'buttonText': 'UPLOAD',
+                fileType:opt.fileType,
+                uploadScript : opt.uploadScript,
+                formData : {
+                	_token:$('#content').find('input[name="_token"]').val()
+                },
+                onUpload:function(filesToUpload){
+                    if(filesToUpload == 0){
+                        return;
+                    };
+                    var div_element = $(this).closest('.uploadImg');
+                    div_element.find('.uploadifiveLoadingBar').show();
+                    div_element.find('.uploadifive-button').hide();
+                    div_element.addClass('uploading');
+                },
+                onProgress:function(file,event){
+                    var percent = 0;
+                    if (event.lengthComputable) {
+                        var percent = Math.round((event.loaded / event.total) * 100);
+                    };
+                    var div_element = $(this).closest('.uploadImg');
+                    div_element.find('.uploadifiveLoadingBar span').css('width', percent + '%');
+                },
+                onError:function(errorType,file){
+                    var div_element = $(this).closest('.uploadImg');
+                    div_element.find('.uploadifiveLoadingBar').hide();
+                    div_element.find('.uploadifive-button').show();
+                    div_element.removeClass('uploading');       
+                },                      
+                onUploadComplete:function(file,data,response){
+                    var div_element = $(this).closest('.uploadImg');
+                    var rsp = $.parseJSON(data);
+                    if(rsp){
+                        div_element.find('img').attr('src',rsp.src);
+                        div_element.find('img').attr('_media_url',rsp.media_url);
+                    }else{
+                        alert('UPLOAD FALIED');
+                    }
+                    var div_element = $(this).closest('.uploadImg');
+                    div_element.find('.uploadifiveLoadingBar').hide();
+                    div_element.find('.uploadifive-button').show();
+                    div_element.find('.image-crop').show();
+
+                    div_element.removeClass('uploading');   
+                },
+                1:1
+            });
+        }
+
+        $('#edit-image-text').on('hide.bs.modal',function() {
+            var editor_imgtxt = CKEDITOR.instances['img_txt_editor'];
+            editor_imgtxt.destroy();
+            delete editor_imgtxt;
+        });
+
+        $('#edit-image-text').find('.saveImageText').click(function() {
+            var modal = $('#edit-image-text');
+            var src = modal.find('img').attr('src');
+            var _media_url = modal.find('img').attr('_media_url');
+            var class_name = modal.find('select').val();
+            var caption = modal.find('textarea.ipt_caption').val();
+            var content = CKEDITOR.instances.img_txt_editor.getData();
+            content = content.replace("<br>","");
+            content = content.replace("<br/>","");
+            content = content.replace("<br />","");
+            if (_media_url == '' || _media_url == undefined) {
+                App.showError(modal,'Please upload image');
+                return false;
+            } else if (content == '') {
+                App.showError(modal,'Please enter text');
+                return false;
+            }
+            var div_element = $('#'+modal.attr('_div_current'));
+            if(div_element.hasClass('cmsInsertBox')){
+                //如果是插入条,表示是新增
+                var data_ele = {
+                    id_div:'div_'+Math.uuid(),
+                    src:src,
+                    media_url:_media_url,
+                    class_name:class_name,
+                    content_html:content,
+                    caption_html:caption.replace(/\n/g, '<br>'),
+                    caption:caption,
+                };
+                var newEle = baidu.template('template_insert_image_text',data_ele);
+                $this._add_element(div_element,newEle);
+                
+                //重新获取真正的div_element
+                div_element = $('#'+data_ele.id_div);
+            } else {
+                div_element.find('img').closest('div').removeClass().addClass(class_name);
+                div_element.find('img').attr({src:src,_media_url:_media_url});
+                div_element.find('.div_content').html(content);
+                div_element.find('.div_caption').html(caption.replace(/\n/g, '<br>'));
+                div_element.find('textarea').val(caption);
+            }
+            if (caption == '') {
+                div_element.find('.div_caption').hide();
+            }
+            modal.modal('hide');
+        });
+    }
+
+    this._bind_xms_save = function() {
+    	$(opt.ele_main + ' .submitBox').click(function() {
+    		console.log(111);
+    		var content = $this.get_content();
+    		$.post(opt.saveScript,{
+    			table: opt.table,
+    			id: opt.id,
+    			content:content,
+    			_token:$('#content').find('input[name="_token"]').val()
+    		},function() {
+    			alert('SUCCESS!');
+    		});
+    	});
+    }
+
+    this._init_content = function(){
+        $this._insertbox($(opt.ele_main+ '.submitBox'));
+        if(opt.content == ''){
+            $('.cmsInsertBox').addClass('only');
+        }else{
+            $.each(opt.content,function(k,v_widget){
+                var newEle = '';
+                if(v_widget.type == 'editor'){
+                    var data_ele = {
+                        id_div:'div_'+Math.uuid(),
+                        id_editor:'editor_'+Math.uuid(),
+                        content_html:v_widget.value
+                    };
+                    newEle = baidu.template('template_insert_editor',data_ele);
+                    newEle = $(newEle);
+                    newEle.find('[_contenteditable]').html(v_widget.value);
+                }else if(v_widget.type == 'image'){
+                    var data_ele = {
+                        id_div:'div_'+Math.uuid(),
+                        id_editor:'',
+                        caption:v_widget.caption
+                    };
+                    newEle = baidu.template('template_insert_image',data_ele);
+                    newEle = $(newEle);
+                    newEle.find('img').attr('src',$.getPhotoUrl(v_widget.media_url,'725_725'));
+                    newEle.find('img').attr('_media_url',v_widget.media_url);
+                    newEle.find('[_contenteditable]').html(v_widget.caption);
+                    newEle.find('.edit-link').html(v_widget.link);
+                }else if(v_widget.type == 'image_text'){
+                    var data_ele = {
+                        id_div:'div_'+Math.uuid(),
+                        src:$.getPhotoUrl(v_widget.media_url,'300_0'),
+                        media_url:v_widget.media_url,
+                        class_name:v_widget.class_name,
+                        content_html:v_widget.content,
+                        content:v_widget.content,
+                        caption_html:v_widget.caption.replace(/\n/g, '<br>'),
+                        caption:v_widget.caption
+                    };
+                    newEle = baidu.template('template_insert_image_text',data_ele);
+                    newEle = $(newEle);
+                }else if(v_widget.type == 'video'){
+                    var data_ele = {
+                        id_div:'div_'+Math.uuid(),
+                        id_editor:'editor_'+Math.uuid()
+                    };
+                    newEle = baidu.template('template_insert_video',data_ele);
+                    newEle = $(newEle);
+                    newEle.find('.div_iframe').html(decodeURIComponent(v_widget.value));
+                    newEle.find("iframe,embed").css({width:'100%'});
+                    newEle.find("iframe,embed").css({height: 640*9/16+41});
+                    newEle.find('textarea:first').html(decodeURIComponent(v_widget.value));
+                    if (v_widget.caption != '') {
+                        newEle.find('[_contenteditable]').show();
+                    }
+                }else if(v_widget.type == 'source'){
+                    var data_ele = {
+                        id_div:'div_'+Math.uuid()
+                    };
+                    newEle = baidu.template('template_insert_source',data_ele);
+                    newEle = $(newEle);
+                    newEle.find('textarea,.div_html').html(v_widget.value);
+                    newEle.find('.cmsHoverCon,.div_html,.cmsMainBoxCon').show();
+            		newEle.find('.htmlBox').hide();
+                    // newEle.find('textarea').on('blur',function(){
+                    //     $this._show_hovercon();
+                    // }).focus();
+                }else if(v_widget.type == 'split'){
+                    var data_ele = {
+                        id_div:'div_'+Math.uuid()
+                    };
+                    newEle = baidu.template('template_insert_split',data_ele);
+                    newEle = $(newEle);
+                }else if(v_widget.type == 'gallery'){
+                    var data_ele = {
+                        id_div:'div_'+Math.uuid()
+                    };
+                    newEle = baidu.template('template_insert_gallery',data_ele);
+                    newEle = $(newEle);
+                    for (i in v_widget.gallery) {
+                        var obj = v_widget.gallery[i];
+                        var data_ele = {
+                            src:$.getPhotoUrl(obj.media_url,'725_483'),
+                            media_url:obj.media_url,
+                            caption_html:obj.caption.replace(/\n/g, '<br>').replace(/\s/g,' '),
+                            caption:obj.caption
+                        };
+                        newSlide = baidu.template('template_empty_gallery',data_ele);
+                        $(newSlide).appendTo(newEle.find('.cms-gallery'));
+                    }
+                };
+                $(opt.ele_main+ '.submitBox').before(newEle);
+                $this._insertbox($(opt.ele_main+ '.submitBox'));
+            });
+        };
+    };
+
+    /**
 	 * 初始化
 	 */
 	this._init = function(){
-		$this._insertbox($(opt.ele_main+ '.submitBox'));
 		$this._check_ele();
+		$this._init_content();
 
         $(opt.ele_main+' .videoBox').hide();
 
@@ -793,9 +1050,62 @@ var easyCms = function(options){
         $this._bind_xcms_insert_split();
         $this._bind_xcms_insert_video();
         $this._bind_xcms_insert_gallery();
+        $this._bind_xcms_insert_image_text();
+        $this._bind_xms_save();
         
         
 	};
+
+	/**
+     * 返回cms的值
+     */
+    this.get_content = function(callback){
+        $(opt.ele_main+ '.insert_video .videoBox .a_save').click();
+        var data = [];
+        $(opt.ele_main+' div.div_element').each(function(){
+            var ele = get_element(this);
+            if(ele != ''){
+                data.push(ele);
+            }
+        });
+        function get_element(div){
+            var ele = '';
+            if($(div).hasClass('insert_source')){//源码模式
+                ele = {type:'source',value:$(div).find('textarea').val()};
+            }else if($(div).hasClass('insert_text')){//编辑器模式
+                ele = {type:'editor',value:$(div).find('[_contenteditable]').size()?$(div).find('[_contenteditable]').html():''};
+            }else if($(div).hasClass('insert_image')){//图片模式
+                ele = {type:'image',caption:$(div).find('[_contenteditable]').size()?$(div).find('[_contenteditable]').html():'',media_url:$(div).find('img').attr('_media_url')};
+            }else if($(div).hasClass('insert_image_text')){
+                ele = {type:'image_text',caption:$(div).find('div.caption').size()?$(div).find('div.caption').html():'', media_url:$(div).find('img').attr('_media_url'),class_name:$(div).find('img').closest('div').attr('class'),content:$(div).find('.div_content').html(),caption:$(div).find('textarea:last').val()};
+            }else if($(div).hasClass('insert_video')){//视频模式
+                ele = {type:'video',value:encodeURIComponent($(div).find('textarea:first').val()),caption:$(div).find('[_contenteditable]').size()?$(div).find('[_contenteditable]').html():''};
+            }else if($(div).hasClass('insert_split')){//分割条
+                ele = {type:'split'};
+            }else if($(div).hasClass('insert_gallery')){
+                gallery = [];
+                $(div).find('.slide').each(function(k,v) {
+                    var slide = {media_url:$(v).find('img').attr('_media_url'),caption:$(v).find('textarea').val()};
+                    gallery.push(slide);
+                });
+                ele = {type:'gallery',gallery:gallery};
+            }else if($(div).hasClass('insert_link')){
+                link = [];
+                $(div).find('.link-group a').each(function(k,v) {
+                    var a = {class_name:$(v).attr('class'),name:$(v).text(),href:$(v).attr('href')};
+                    link.push(a);
+                });
+                ele = {type:'link',link:link};
+            };
+            return ele;
+        };
+        if(data.length == 0){
+            data = '';
+        }else{
+            data = JSON.stringify(data);
+        }
+        return data;
+    };
 
 	this._init();
     

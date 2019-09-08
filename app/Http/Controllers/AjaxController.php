@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Request;
 use Image;
+use Illuminate\Support\Facades\DB;
 
 class AjaxController extends Controller
 {
@@ -21,5 +22,21 @@ class AjaxController extends Controller
             $data['media_url'] = $filepath;
             return json_encode($data);
         }
+    }
+
+    public function save_cms(Request $request)
+    {
+        $insert_bool = DB::table('page')->where('id', $request::post('id'))->update(['content' => json_encode($request::post('content'),JSON_HEX_QUOT)]);
+    }
+
+
+    public function add_page(Request $request)
+    {
+        if($request::post('id')) {
+            $res = DB::table('page')->where('id',$request::post('id'))->update(['title' => $request::post('title')]);
+        } else {
+            $res = DB::table('page')->insert(['id' => $request::post('id'),'title' => $request::post('title')]);
+        }
+        die('SUCCESS');
     }
 }

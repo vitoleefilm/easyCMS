@@ -5,7 +5,7 @@
 			<div class="btn-group">
 				<button class="btn btn-white xcms_insert_text"> TEXT</button>
 				<a class="btn btn-white xcms_insert_image" id="<%=id_img%>" href="javascript:;"> IMAGE</a>
-				<a class="btn btn-white" href="javascript:;" href="javascript:;"> TEXT & IMAGE</a>
+				<button class="btn btn-white xcms_insert_image_text" href="javascript:;" href="javascript:;"> TEXT & IMAGE</button>
 				<button class="btn btn-white xcms_insert_source" href="javascript:;"> CODE</button>
 				<button class="btn btn-white xcms_insert_video" href="javascript:;"> VIDEO</button>
 				<button class="btn btn-white xcms_insert_gallery" href="javascript:;"> SLIDES</button>
@@ -41,7 +41,7 @@
 		</div>
 		<div class="cmsMainBoxCon">
 			<img id="<%=id_img%>" src="" alt="">
-			<p class="caption" style="display:<%=caption.length >  0 ? 'block': 'none'%>"  _contenteditable contenteditable="true">
+			<p class="caption" style="display:<%=caption.length >  0 ? 'block': 'none'%>"  _contenteditable contenteditable="true"><%:=content_html%>
 			</p>
 		</div>
 	</div>
@@ -69,10 +69,10 @@
 </script>
 
 <script id="template_insert_gallery" type="text/html">
-	<div class="div_element cmsMainBox" _element id="<%=id_div%>">
+	<div class="div_element cmsMainBox insert_gallery" _element id="<%=id_div%>">
 		<div class="cmsHoverCon">
 			<div class="btn-group">
-				<a class="btn btn-white xcms_hover_edit" href="javascript:;">Edit</a>
+				<a class="btn btn-white xcms_insert_gallery" href="javascript:;">Edit</a>
 				<a class="btn btn-white xcms_hover_sort" href="javascript:;">Sort</a>
 				<a class="btn btn-white xcms_hover_del" href="javascript:;">Delete</a>
 			</div>
@@ -114,20 +114,22 @@
 </script>
 
 <script id="template_insert_image_text" type="text/html">
-	<div class="div_element cmsMainBox" _element id="<%=id_div%>">
+	<div class="div_element cmsMainBox insert_image_text" _element id="<%=id_div%>">
 		<div class="cmsHoverCon">
 			<div class="btn-group">
-				<a class="btn btn-white xcms_hover_edit" href="javascript:;">Edit</a>
+				<a class="btn btn-white xcms_insert_image_text" href="javascript:;">Edit</a>
 				<a class="btn btn-white xcms_hover_sort" href="javascript:;"></i>Sort</a>
 				<a class="btn btn-white xcms_hover_del" href="javascript:;">Delete</a>
 			</div>
 		</div>
-		<div class="cmsMainBoxCon" id="editable" contenteditable="true">
+		<div class="cmsMainBoxCon">
 			<div class="<%=class_name%>">
 				<img src="<%=src%>" _media_url="<%=media_url%>" alt="">
 				<div class="caption"><%=caption_html%></div>
+				<textarea style="display: none"><%=caption%></textarea>
 			</div>
-			<%=content_html%>
+			<div class="float-box div_content"><%:=content_html%></div>
+			
 		</div>
 	</div>
 </script>
@@ -138,8 +140,7 @@
 				<div class="bg"><img _media_url="<%=media_url%>" src="<%=src%>"></div>
 				<div class="editBtn">
 					<span class="file_uploadImg" id="<%=span_id%>"></span>
-					<a href="javascript:;" class="btn btn-primary btn-block btn-small edit" style="margin-top: 5px"> EDIT</a>
-					<a href="javascript:;" class="btn btn-danger btn-block btn-small"><i class="fa fa-trash-o"></i> DELETE</a>
+					<a href="javascript:;" class="btn btn-block btn-small" onclick="$(this).closest('li').remove();"><i class="fa fa-trash-o"></i> DELETE</a>
 					<i class="fa fa-arrows"></i>
 				</div>
 			</div>
@@ -151,11 +152,12 @@
 		</div>
 	</li>
 </script>
-<script id="template_empty_slide" type="text/html">
-	<div>
+<script id="template_empty_gallery" type="text/html">
+	<div class="slide">
 		<div class="pic">
-			<img src="" alt="">
+			<img src="<%=src%>" _media_url="<%=media_url%>" alt="">
 		</div>
-		<p class="caption"></p>
+		<p class="caption"><%=caption_html%></p>
+		<textarea style="display:none"><%=caption%></textarea>
 	</div>
 </script>
