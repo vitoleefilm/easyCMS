@@ -10,8 +10,6 @@ class PageController extends Controller
     //
     public function index()
     {
-        echo phpinfo();
-        die;
     	$Pages = DB::table('page')->get();
     	return view('index')->with('Pages',$Pages);
     }
