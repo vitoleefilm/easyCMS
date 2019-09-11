@@ -93,3 +93,94 @@
     padding: 10px;
     margin: 0 !important;
 }
+
+.cmsPage .gallery .cms-swiper {
+    position: relative;
+    width: 100%;
+    z-index: 50;
+}
+
+.cmsPage .gallery .cms-swiper .swiper-slide {
+    position: relative;
+    width: 100%;
+    z-index: 50;
+}
+
+.cmsPage .gallery .cms-swiper .swiper-slide .pic {
+    width: 100%;
+    height: 483px;
+    text-align: center;
+    font-size: 0;
+    background: #707478;
+}
+
+.cmsPage .gallery .cms-swiper .swiper-slide .pic img {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.cmsPage .gallery .cms-swiper .swiper-slide .caption {
+    padding: 10px 0;
+    background: #e9e9e9;
+    padding: 10px;
+    margin: 0 !important;
+}
+
+.cmsPage .gallery .cms-button-prev, 
+.cmsPage .gallery .cms-button-next {
+    display: block;
+    position: absolute;
+    width: 56px;
+    height: 112px;
+    top: 185px;
+    z-index: 100;
+    cursor: pointer;
+    -moz-transition: all .2s ease-out;
+    -webkit-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+.cmsPage .gallery .cms-button-prev:hover, 
+.cmsPage .gallery .cms-button-next:hover {
+    opacity: .8;
+}
+.cmsPage .gallery .swiper-button-disabled {
+    opacity: .3 !important;
+    cursor: default !important;
+}
+.cmsPage .gallery .cms-button-prev {
+    left: 0;
+}
+.cmsPage .gallery .cms-button-prev:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 43px;
+    left: 18px;
+    top: 50%;
+    margin-top: -21px;
+    background-position: -227px -22px;
+        background-image: -webkit-image-set(url(img/icon.png) 1x, url(img/icon@2x.png) 2x);
+}
+.cmsPage .gallery .cms-button-next {
+    right: 0;
+}
+.cmsPage .gallery .cms-button-next:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 43px;
+    right: 18px;
+    top: 50%;
+    margin-top: -21px;
+    background-position: -249px -22px;
+    background-image: -webkit-image-set(url(img/icon.png) 1x, url(img/icon@2x.png) 2x);
+}
+.cmsPage .gallery .swiper-button-disabled {
+    opacity: .3 !important;
+}

@@ -14,6 +14,7 @@ var easyCms = function(options){
 		table:'',
 		content:'',
 		fileType:['.jpg','.png','.gif'],
+		module:'back',
 		1:1
 	};
 	opt = $.extend({}, opt, options);
@@ -1015,13 +1016,19 @@ var easyCms = function(options){
                     for (i in v_widget.gallery) {
                         var obj = v_widget.gallery[i];
                         var data_ele = {
-                            src:$.getPhotoUrl(obj.media_url,'725_483'),
+                            src:$.getPhotoUrl(obj.media_url),
                             media_url:obj.media_url,
                             caption_html:obj.caption.replace(/\n/g, '<br>').replace(/\s/g,' '),
                             caption:obj.caption
                         };
                         newSlide = baidu.template('template_empty_gallery',data_ele);
-                        $(newSlide).appendTo(newEle.find('.cms-gallery'));
+                        console.log(44);
+                        if (opt.module == 'back') {
+                        	$(newSlide).appendTo(newEle.find('.cms-gallery'));
+                        } else {
+                        	$(newSlide).appendTo(newEle.find('.swiper-wrapper'));
+                        }
+                        
                     }
                 };
                 $(opt.ele_main+ '.submitBox').before(newEle);

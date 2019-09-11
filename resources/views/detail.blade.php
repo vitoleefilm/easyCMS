@@ -9,11 +9,14 @@
 	<link rel="stylesheet" href="{{asset('/css/style.min.css')}}">
 	<link rel="stylesheet" href="{{asset('/css/cms.css')}}">
 	<link rel="stylesheet" href="{{asset('/css/cmsadmin.css')}}">
+	<link rel="stylesheet" href="{{asset('/css/swiper.css')}}">
 	<!-- <script src="{{asset('/js/jquery-1.8.2.min.js')}}"></script> -->
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 	<script src="{{asset('/js/plugins/baiduTemplate.js')}}"></script>
+	<script src="{{asset('/js/swiper-2.7.min.js')}}"></script>
+	<script src="{{asset('/js/swiper.jquery.min.js')}}"></script>
 	<script src="{{asset('/js/plugins/math.js')}}"></script>
 	<script src="{{asset('/js/plugins/jquery.uploadifive.js')}}"></script>
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -58,8 +61,16 @@
 			ele_sort:'#sort-cms',
 			table:'Page',
 			id:{{$data->id}},
-			content:content
+			content:content,
+			module:'front'
 		});
+
+		var cmsSwiper = new Swiper('.cms-swiper', {
+            nextButton: '.cms-button-next',
+            prevButton: '.cms-button-prev',
+            speed: 700,
+            spaceBetween: 40
+        });
 		console.log(window.easyCms);
 
 		// $('.submitBox').click(function() {

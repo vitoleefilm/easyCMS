@@ -35,7 +35,12 @@
 <script id="template_insert_gallery" type="text/html">
 	<div class="div_element cmsMainBox insert_gallery" _element id="<%=id_div%>">
 		<div class="cmsMainBoxCon">
-			<div class="cms-gallery">
+			<div class="gallery">
+				<div class="swiper-container cms-swiper">
+					<div class="swiper-wrapper"></div>
+				</div>
+				<div class="cms-button-prev"></div>
+				<div class="cms-button-next"></div>
 			</div>
 		</div>
 	</div>
@@ -94,11 +99,10 @@
 	</li>
 </script>
 <script id="template_empty_gallery" type="text/html">
-	<div class="slide">
+	<div class="swiper-slide">
 		<div class="pic">
 			<img src="<%=src%>" _media_url="<%=media_url%>" alt="">
 		</div>
-		<p class="caption"><%=caption_html%></p>
-		<textarea style="display:none"><%=caption%></textarea>
+		<div class="caption"><%=caption_html%></div>
 	</div>
 </script>
