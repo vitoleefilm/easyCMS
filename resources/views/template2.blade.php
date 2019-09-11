@@ -101,7 +101,8 @@
 <script id="template_empty_gallery" type="text/html">
 	<div class="swiper-slide">
 		<div class="pic">
-			<img src="<%=src%>" _media_url="<%=media_url%>" alt="">
+			<span style="height:100%;display:inline-block;vertical-align:middle"></span>
+			<img style="vertical-align: middle" src="<%=src%>" _media_url="<%=media_url%>" alt="">
 		</div>
 		<div class="caption"><%=caption_html%></div>
 	</div>
