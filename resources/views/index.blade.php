@@ -50,7 +50,8 @@
 	                                <td>
 	                                	<button type="button" class="btn btn-primary editPageName">EDIT NAME</button>
 	                                	<button type="button" class="btn btn-primary editPage">EDIT</button>
-	                                	<button type="button" class="btn btn-secondary ">DELETE</button>
+	                                	<button type="button" class="btn btn-secondary viewPage">VIEW</button>
+	                                	<button type="button" class="btn btn-secondary delPage">DELETE</button>
 	                                </td>
 	                            </tr>
 	                            @endforeach
@@ -123,5 +124,20 @@
 	$('.editPage').click(function() {
 		var id = $(this).closest('tr').attr('_id');
 		window.location.href = '/page/edit/'+id;
+	});
+
+	$('.viewPage').click(function() {
+		var id = $(this).closest('tr').attr('_id');
+		window.location.href = '/page/detail/'+id;
+	});
+
+	$('.delPage').click(function() {
+		var id = $(this).closest('tr').attr('_id');
+		$.post('/del_page',{
+			id:id,
+			_token:$('input[name=_token]').val()
+		},function() {
+			window.location.reload();
+		});
 	});
 </script>

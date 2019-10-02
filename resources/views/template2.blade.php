@@ -5,7 +5,7 @@
 
 <script id="template_insert_editor" type="text/html">
 	<div class="div_element cmsMainBox insert_text" _element id="<%=id_div%>">
-		<div class="cmsMainBoxCon" id="<%=id_editor%>" _contenteditable contenteditable="true">
+		<div class="cmsMainBoxCon" id="<%=id_editor%>">
 		</div>
 	</div>
 </script>
@@ -14,7 +14,7 @@
 	<div class="div_element cmsMainBox insert_image" _element id="<%=id_div%>">
 		<div class="cmsMainBoxCon">
 			<img id="<%=id_img%>" src="" alt="">
-			<p class="caption" style="display:<%=caption.length >  0 ? 'block': 'none'%>"  _contenteditable contenteditable="true"><%:=content_html%>
+			<p class="caption" style="display:<%=caption.length >  0 ? 'block': 'none'%>"><%:=content_html%>
 			</p>
 		</div>
 	</div>

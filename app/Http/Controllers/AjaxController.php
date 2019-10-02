@@ -28,6 +28,12 @@ class AjaxController extends Controller
         $insert_bool = DB::table('page')->where('id', $request::post('id'))->update(['content' => $request::post('content')]);
     }
 
+    public function del_page(Request $request)
+    {
+        $insert_bool = DB::table('page')->where('id', $request::post('id'))->delete();
+        die('SUCCESS');
+    }
+
 
     public function add_page(Request $request)
     {

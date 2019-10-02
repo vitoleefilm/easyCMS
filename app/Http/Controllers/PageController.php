@@ -25,7 +25,6 @@ class PageController extends Controller
     {
     	$Page = DB::table('page')->where('id',$id)->first();
         $content = json_decode($Page->content);
-        print_r($content);die;
     	return view('detail')->with('data',$Page);
     }
 

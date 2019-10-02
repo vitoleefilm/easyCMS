@@ -227,7 +227,7 @@ var easyCms = function(options){
             var idx = 0;
             var div_current = $(opt.ele_sort).attr('_div_current');
             $(div_current).children().each(function(){
-                if($(this).hasClass('cmsInsertBox')){
+                if($(this).hasClass('cmsInsertBox') || $(this).hasClass('submitBox')){
                     newHTML.append($(this));
                 }else{
                     if(ids[idx]){
@@ -236,6 +236,7 @@ var easyCms = function(options){
                     idx++;
                 }
             });
+            // $('.submitBox').before(newHTML.children());
             $(div_current).html('').append(newHTML.children());
             $(opt.ele_sort).modal('hide');
         });
