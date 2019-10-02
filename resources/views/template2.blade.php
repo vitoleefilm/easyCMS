@@ -5,7 +5,7 @@
 
 <script id="template_insert_editor" type="text/html">
 	<div class="div_element cmsMainBox insert_text" _element id="<%=id_div%>">
-		<div class="cmsMainBoxCon" id="<%=id_editor%>">
+		<div class="cmsMainBoxCon" id="<%=id_editor%>" _contenteditable>
 		</div>
 	</div>
 </script>
