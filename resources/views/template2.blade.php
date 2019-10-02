@@ -14,7 +14,7 @@
 	<div class="div_element cmsMainBox insert_image" _element id="<%=id_div%>">
 		<div class="cmsMainBoxCon">
 			<img id="<%=id_img%>" src="" alt="">
-			<p class="caption" style="display:<%=caption.length >  0 ? 'block': 'none'%>"><%:=content_html%>
+			<p class="caption" style="display:<%=caption.length >  0 ? 'block': 'none'%>"  _contenteditable><%:=content_html%>
 			</p>
 		</div>
 	</div>
