@@ -4,6 +4,10 @@
 $data->content = str_replace(array('\\n','/r/n', '/r', '/n','\n','\r'), '',$data->content);
 // $data->content = json_decode($data->content);
 // print_r($data->content);die;
+?>
+<?php
+$r = htmlspecialchars_decode($data->content);
+// print_r($r);die;
 ?><!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -51,14 +55,17 @@ $data->content = str_replace(array('\\n','/r/n', '/r', '/n','\n','\r'), '',$data
 <?die;?>
 @include('template')
 @include('modal')
+
 </html>
 <script src="{{asset('/js/easyCms.js')}}"></script>
 <script>
 	$(document).ready(function() {
 		var content = '';
 		@if (!empty($data->content))
-
-			content = JSON.parse($('<div>').html("{{$data->content}}")[0].textContent);
+			// content = {{htmlspecialchars_decode($data->content)}};
+			content = <?php echo $r;?>;
+			console.log(content);
+			// content = JSON.parse($('<div>').html({{$data->content}})[0].textContent);
 		@endif
 		window.easyCms = easyCms({
 			ele_main:'.div_cms_main',

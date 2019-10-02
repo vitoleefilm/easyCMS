@@ -24,8 +24,8 @@ class PageController extends Controller
     public function detail($id)
     {
     	$Page = DB::table('page')->where('id',$id)->first();
-        // $content = json_decode($Page->content);
-        // print_r($content[0]);die;
+        $content = json_decode($Page->content);
+        print_r($content);die;
     	return view('detail')->with('data',$Page);
     }
 
