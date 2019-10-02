@@ -165,7 +165,7 @@
     top: 50%;
     margin-top: -21px;
     background-position: -227px -22px;
-        background-image: -webkit-image-set(url(img/icon.png) 1x, url(img/icon@2x.png) 2x);
+    background-image: -webkit-image-set(url(img/icon.png) 1x, url(img/icon@2x.png) 2x);
 }
 .cmsPage .gallery .cms-button-next {
     right: 0;

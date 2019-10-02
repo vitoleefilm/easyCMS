@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+
+<?php 
+			
+$data->content = str_replace(array('\\n','/r/n', '/r', '/n','\n','\r'), '',$data->content);
+// $data->content = json_decode($data->content);
+// print_r($data->content);die;
+?><!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
 	<meta charset="utf-8"> 
@@ -31,17 +37,18 @@
 				<h2>easyCMS</h2>
 			</div>
 			@csrf
-				<div class="row">
-					<div class="page-content">
-						<div class="cmsPage div_cms_main" style="max-width: 640px; margin: 0 auto;">
-							<button class="submitBox btn btn-white">SAVE</button>
-						</div>
+			<div class="row">
+				<div class="page-content">
+					<div class="cmsPage div_cms_main" style="max-width: 640px; margin: 0 auto;">
+						<button class="submitBox btn btn-white">SAVE</button>
 					</div>
-					
 				</div>
+				
+			</div>
 		</div>
 	</div>
 </body>
+<?die;?>
 @include('template')
 @include('modal')
 </html>
@@ -50,8 +57,8 @@
 	$(document).ready(function() {
 		var content = '';
 		@if (!empty($data->content))
-			<?php $data->content = json_decode($data->content,true)?>
-			content = JSON.parse($('<div>').html("{{str_replace(array('/r/n', '/r', '/n','\n','\r'), '',$data->content)}}")[0].textContent);
+
+			content = JSON.parse($('<div>').html("{{$data->content}}")[0].textContent);
 		@endif
 		window.easyCms = easyCms({
 			ele_main:'.div_cms_main',
@@ -62,11 +69,7 @@
 		});
 		console.log(window.easyCms);
 
-		// $('.submitBox').click(function() {
-		// 	console.log(window.easyCms);
-		// 	// content = window.easyCms.get_content();
-		// 	console.log(content);
-		// });
+		
 	});
 	
 </script>

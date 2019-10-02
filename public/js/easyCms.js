@@ -1,12 +1,8 @@
 var easyCms = function(options){
 	var opt = {
-		/**
-		 * main div
-		 */
-		ele_main:'.div_cms_main',
-		/**
-		 * sort div
-		 */
+		// main container
+		ele_main:'.div_cms_main', 
+		// sort div
 		ele_sort:'#sort-cms',
 		editor_zIndex:999,
 		uploadScript:'/upload_photo',
@@ -28,7 +24,6 @@ var easyCms = function(options){
 	 * check if have ele_main and ele_sort
 	 */
 	this._check_ele = function(){
-		console.log(opt.ele_sort);
 		if(!$(opt.ele_main).size()){
 			alert('Please configure ele_main');
 			return;
@@ -39,7 +34,7 @@ var easyCms = function(options){
 		};
 	};
     /**
-     * 隐藏遮罩
+     * hide mask
      */
     this._hide_hovercon = function(){
         $(opt.ele_main + '.cmsInsertBox').css('visibility','hidden');
@@ -47,7 +42,7 @@ var easyCms = function(options){
     },
 
     /**
-     * 恢复遮罩
+     * show mask
      */
     this._show_hovercon = function(){
         $(opt.ele_main + '.cmsInsertBox').css('visibility','');
@@ -55,7 +50,7 @@ var easyCms = function(options){
         $(opt.ele_main + '.editButtonList').show();
     },
     /**
-     * 添加元素
+     * add element
      */
     this._add_element = function(insert_source,newEle){
         $('.cmsInsertBox').removeClass('only');
@@ -81,7 +76,7 @@ var easyCms = function(options){
         $this._bind_xcms_insert_image();
     };
     /**
-     * 添加插入条
+     * add toolbar
      */
     this._insertbox = function(newEle){
         var data_ele = {
@@ -878,9 +873,12 @@ var easyCms = function(options){
             var class_name = modal.find('select').val();
             var caption = modal.find('textarea.ipt_caption').val();
             var content = CKEDITOR.instances.img_txt_editor.getData();
+            console.log(content);
             content = content.replace("<br>","");
             content = content.replace("<br/>","");
             content = content.replace("<br />","");
+            content = content.replace("\\n","");
+            console.log(content);
             if (_media_url == '' || _media_url == undefined) {
                 App.showError(modal,'Please upload image');
                 return false;
@@ -921,7 +919,6 @@ var easyCms = function(options){
 
     this._bind_xms_save = function() {
     	$(opt.ele_main + ' .submitBox').click(function() {
-    		console.log(111);
     		var content = $this.get_content();
     		$.post(opt.saveScript,{
     			table: opt.table,
@@ -958,14 +955,14 @@ var easyCms = function(options){
                     };
                     newEle = baidu.template('template_insert_image',data_ele);
                     newEle = $(newEle);
-                    newEle.find('img').attr('src',$.getPhotoUrl(v_widget.media_url,'725_725'));
+                    newEle.find('img').attr('src',$.getPhotoUrl(v_widget.media_url));
                     newEle.find('img').attr('_media_url',v_widget.media_url);
                     newEle.find('[_contenteditable]').html(v_widget.caption);
                     newEle.find('.edit-link').html(v_widget.link);
                 }else if(v_widget.type == 'image_text'){
                     var data_ele = {
                         id_div:'div_'+Math.uuid(),
-                        src:$.getPhotoUrl(v_widget.media_url,'300_0'),
+                        src:$.getPhotoUrl(v_widget.media_url),
                         media_url:v_widget.media_url,
                         class_name:v_widget.class_name,
                         content_html:v_widget.content,
@@ -1022,7 +1019,6 @@ var easyCms = function(options){
                             caption:obj.caption
                         };
                         newSlide = baidu.template('template_empty_gallery',data_ele);
-                        console.log(44);
                         if (opt.module == 'back') {
                         	$(newSlide).appendTo(newEle.find('.cms-gallery'));
                         } else {
